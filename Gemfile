@@ -48,3 +48,5 @@ gem "capybara", ">= 1.1.2", :group => :test
 gem "factory_girl_rails", ">= 4.0.0", :group => [:development, :test]
 gem "bootstrap-sass", ">= 2.0.4.0"
 gem "devise", ">= 2.1.2"
+gem "therubyracer", :group => :assets, :platform => :ruby
+gem "hub", ">= 1.10.2", :require => nil, :group => [:development]
