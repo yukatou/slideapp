@@ -1,14 +1,22 @@
 = link_to "Slideapp", root_path, :class => 'brand'
 %ul.nav
+  %li
+    = link_to '新規スライド', new_slide_path
+  %li
+    = link_to 'スライド一覧', slides_path
+%ul.nav.pull-right
   - if user_signed_in?
-    %li
-      = link_to 'Logout', destroy_user_session_path, :method=>'delete'
+    %li.dropdown#nav-login
+      %a.dropdown-toggle{:href => '#', 'data-toggle' => 'dropdown'}
+        = current_user.name
+        %span.caret
+      %ul.dropdown-menu
+        %li
+          = link_to 'Logout', destroy_user_session_path, :method=>'delete'
+        %li
+          = link_to 'Edit account', edit_user_registration_path
   - else
     %li
       = link_to 'Login', new_user_session_path
-  - if user_signed_in?
-    %li
-      = link_to 'Edit account', edit_user_registration_path
-  - else
     %li
       = link_to 'Sign up', new_user_registration_path
