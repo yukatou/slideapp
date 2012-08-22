@@ -9,4 +9,16 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def create
+    @slide = Slide.new()
+  end
+
+
+  def update
+  end
+
+
+  def delete
+  end
+
 end
