@@ -3,11 +3,11 @@
 
 %div
   = form_for @slide do |f|
-    = f.label :title
-    = f.text_field :title
-    = f.label :description
-    = f.text_area :description
-    = f.label :ion
-    = f.text_field :description
-    = f.submit
+    %div
+      = f.label :title
+      = f.text_field :title
+    %div
+      = f.label :description
+      = f.text_area :description
+    = f.submit "Create Slide", :class => "btn btn-success"
 
