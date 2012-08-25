@@ -1,0 +1,6 @@
+<% if @slides.any? %>
+  <% @slides.each do |slide| %>
+    $(".slides_list").append("<%= j(render 'slide_in_list', :slide => slide) %>");
+  <% end %>
+  $(".slide_in_list").wookmark({container: $(".slides_list"), itemWidth: 105});
+<% end %>

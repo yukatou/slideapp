@@ -2,11 +2,15 @@
 class SlidesController < ApplicationController
   before_filter :authenticate_user!, :only => [:new, :create]
   def index
-    @slides = Slide.where(:status => 200).order("id DESC").limit(20)
+    @slides = Slide.where(:status => 200).order("id DESC").page(params[:page]).per(30)
     respond_to do |format|
       format.html
       format.json { render json: @slides }
     end
+  end
+
+  def add_next
+    @slides = Slide.where(:status => 200).order("id DESC").page(params[:page]).per(30)
   end
 
   def show
