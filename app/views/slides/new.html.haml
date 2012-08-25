@@ -1,7 +1,5 @@
-
-%h2 PowerPointのアップロード
-
-%div
+.content
+  %h2 PowerPointのアップロード
   = form_for @slide,:html=>{:multipart=>true} do |f|
     %div
       = f.label :title

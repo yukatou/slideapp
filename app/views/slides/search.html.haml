@@ -1,4 +1,4 @@
-%h2 スライド一覧
+%h2 検索結果(#{@slides.count})
 %ul.slides_list
   - @slides.each do |slide|
     = render "slide_in_list", :slide => slide
