@@ -54,8 +54,12 @@ class SlidesController < ApplicationController
     @slides = Slide.search(params[:search])
   end
 
-  def get_files
+  def pages
     @pages = Page.where(:slide_id => params[:id])
+    @pages.each do |page|
+      @page["url"] = root_url
+      @page["url_thm"] = root_url
+    end
     render json: @pages
   end
 end
