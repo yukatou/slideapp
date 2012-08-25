@@ -46,7 +46,7 @@ class SlidesController < ApplicationController
       redirect_to @slide, notice: '追加しました'
     rescue => e
       puts e.message
-      render action: "new", error: e.message
+      render action: "new", alert: e.message
     end
   end
 

@@ -15,10 +15,10 @@ class Converter
 
     begin 
       slide = Slide.find(slide_id)
-      file = Rails.root + '/' + slide.path + '/' + slide.origin
+      origin = Rails.root + '/' + slide.path + '/' + slide.origin
       path = File.expand_path("log/echo.log", Rails.root)
       File.open(path, 'a') do |f|
-        f.puts "#{slide.id} #{file}" 
+        f.puts "#{slide.id} #{origin}" 
       end
       raise unless File.exists?(file)
 
