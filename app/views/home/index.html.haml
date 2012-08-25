@@ -1,8 +1,8 @@
-- if !user_signed_in?
-  - content_for :welcome do
-    #welcome
-      #brand Slideapp
-      %p Share your slides real-time.
+- content_for :welcome do
+  #welcome
+    #brand Slideapp
+    %p Share your slides real-time.
+    - if !user_signed_in?
       .btns
         %span= link_to 'Sign up', new_user_registration_path, :class => "btn btn-large btn-primary"
         %span or
@@ -10,12 +10,10 @@
 
 .row
   .span9
-    %h1 最近追加されたスライド
+    %h2 最近追加されたスライド
     %ul.slides_list
       - @latest_slides.each do |slide|
-        %li.slide_in_list
-          = image_tag "converting.png"
-          %h2= slide.title
+        = render "slides/slide_in_list", :slide => slide
   .span3
-    .well
-      %h1 test
+    .content
+      %h2 test

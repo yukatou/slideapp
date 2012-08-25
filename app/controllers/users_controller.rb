@@ -7,6 +7,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @queued_slides = Slide.where(:status => [0,100], :user_id => current_user.id)
+    @slides = Slide.where(:status => 200, :user_id => current_user.id)
     respond_to do |format|
       format.html
       format.json { render json: @user }

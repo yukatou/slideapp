@@ -1,5 +1,26 @@
-%h3 User
-%p
-  User: #{@user.name}
-%p
-  Email: #{@user.email if @user.email}
+.user_header
+  %h1= @user.name
+  %div Email: #{@user.email if @user.email}
+  %div Member since: #{@user.created_at.strftime("%Y/%m/%d")}
+.user_content.row
+  .user_slides.span9
+    - if @queued_slides.any? or @slides.any?
+      - if @queued_slides.any?
+        %h2 変換待ちスライド(#{@queued_slides.count})
+        %ul.queued_slides_list
+          - @queued_slides.each do |slide|
+            %li.queued_slide_in_list
+              = image_tag "converting.png", :width => "95"
+              %h3= slide.title
+      %h2 スライド(#{@slides.count})
+      %ul.slides_list
+        - @slides.each do |slide|
+          = render "slides/slide_in_list", :slide => slide
+
+    - else
+      %h2 まだスライドはありません
+    = link_to "Create Slide", new_slide_path, :class => "btn btn-primary"
+  .span3
+    .content
+      %h2 test
+

@@ -21,3 +21,4 @@ gem "devise", ">= 2.1.2"
 gem "therubyracer", :group => :assets, :platform => :ruby
 gem "hub", ">= 1.10.2", :require => nil, :group => [:development]
 gem 'resque'
+gem "meta_search"

@@ -2,12 +2,19 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.slides_list {
+.slides_list,.queued_slides_list {
   list-style-type: none;
   position: relative;
   margin: 10px 0 0;
 }
 .slide_in_list {
   padding: 9px;
+  border: solid 1px #ccc;
+  &:hover {
+    background: #ffc;
+  }
+}
+.queued_slide_in_list {
+  padding: 4px;
   border: solid 1px #ccc;
 }
