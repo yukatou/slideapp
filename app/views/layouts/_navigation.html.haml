@@ -5,11 +5,11 @@
   %span.icon-bar
 .container.nav-collapse
   %ul.nav
-    %li= link_to '新規スライド', new_slide_path
+    %li= link_to '新規', new_slide_path
     - if user_signed_in?
       %li= link_to '自分のスライド', user_path(current_user)
-    %li= link_to 'スライド一覧', slides_path
-  = form_for search_slide, :url => {:controller => :slides, :action => :search}, :html => {:class => "navbar-search", :method => :post} do |f|
+    %li= link_to '一覧', slides_path
+  = form_for search_slide, :url => slides_search_path, :html => {:class => "navbar-search", :method => :post} do |f|
     = f.text_field :title_or_description_contains, :class => "search-query", :placeholder => "Search Slides"
   %ul.nav.pull-right
     - if user_signed_in?
