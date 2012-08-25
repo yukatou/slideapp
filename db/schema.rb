@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120822040732) do
+ActiveRecord::Schema.define(:version => 20120825061212) do
+
+  create_table "pages", :force => true do |t|
+    t.string   "filename",   :null => false
+    t.integer  "order",      :null => false
+    t.integer  "slide_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "pages", ["slide_id"], :name => "index_pages_on_slide_id"
 
   create_table "slides", :force => true do |t|
     t.string   "title",                      :null => false
@@ -21,6 +31,7 @@ ActiveRecord::Schema.define(:version => 20120822040732) do
     t.integer  "user_id"
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
+    t.string   "origin"
   end
 
   add_index "slides", ["user_id"], :name => "index_slides_on_user_id"

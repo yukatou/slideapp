@@ -73,3 +73,7 @@ pickle-email-*.html
 
 # vim artifacts
 **.swp
+
+
+# slides
+tmp/slides/
