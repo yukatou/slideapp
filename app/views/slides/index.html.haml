@@ -1,2 +1,6 @@
-%h1 Slides#index
-%p Find me in app/views/slides/index.html.haml
+%h1 最近追加されたスライド
+%ul.slides_list
+  - @slides.each do |slide|
+    %li.slide_in_list
+      = image_tag "converting.png"
+      %h2= slide.title

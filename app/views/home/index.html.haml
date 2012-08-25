@@ -8,7 +8,14 @@
         %span or
         %span= link_to 'Login', new_user_session_path, :class => "btn btn-large btn-info"
 
-%h3 Home
-- @users.each do |user|
-  %p
-    User: #{link_to user.name, user}
+.row
+  .span9
+    %h1 最近追加されたスライド
+    %ul.slides_list
+      - @latest_slides.each do |slide|
+        %li.slide_in_list
+          = image_tag "converting.png"
+          %h2= slide.title
+  .span3
+    .well
+      %h1 test

@@ -20,9 +20,8 @@
     #main{:role => "main"}
       = yield(:welcome) if content_for?(:welcome)
       .container
-        .content
-          = render 'layouts/messages'
-          = yield
+        = render 'layouts/messages'
+        = yield
       %footer
         %p
           &copy; KTK

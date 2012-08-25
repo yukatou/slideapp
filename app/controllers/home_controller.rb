@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    @users = User.all
+    @latest_slides = Slide.order("id DESC").limit(9)
   end
 end
