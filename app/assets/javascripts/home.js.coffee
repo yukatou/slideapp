@@ -4,4 +4,4 @@
 
 $ ->
   $(".slides_list img").imagesLoaded ->
-    $(".slide_in_list").wookmark({container: $(".slides_list"), itemWidth: 220})
+    $(".slide_in_list").wookmark({container: $(".slides_list"), itemWidth: 105})

@@ -50,16 +50,29 @@ class SlidesController < ApplicationController
     end
   end
 
+  def destroy
+    @slide = Slide.find(params[:id])
+    @slide.destroy
+
+    respond_to do |format|
+      format.html { redirect_to user_path(current_user) }
+      format.json { head :no_content }
+    end
+  end
+
   def search
     @slides = Slide.search(params[:search])
   end
 
   def pages
-    @pages = Page.where(:slide_id => params[:id])
-    @pages.each do |page|
-      @page["url"] = root_url
-      @page["url_thm"] = root_url
+    slide = Slide.find(params[:id])
+    hash = {"slide_id"=> slide.id, "user_id"=> slide.user.id, "data" => {}}
+    Page.where(:slide_id => params[:id]).each do |page|
+      hash["data"][page.order] = {
+        "url"=> root_url + slide.path + page.filename,
+        "url_thm"=> root_url + slide.path + page.thm_filename
+      }
     end
-    render json: @pages
+    render json: hash
   end
 end
