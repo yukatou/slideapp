@@ -2,7 +2,7 @@
 %h2 PowerPointのアップロード
 
 %div
-  = form_for @slide do |f|
+  = form_for @slide,:html=>{:multipart=>true} do |f|
     %div
       = f.label :title
       = f.text_field :title

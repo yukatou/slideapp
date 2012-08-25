@@ -20,6 +20,9 @@ class SlidesController < ApplicationController
   def create
     @slide = Slide.new(params[:slide])
     @slide.user_id = current_user.id
+
+    puts params[:file].content_type
+
     if @slide.save
       redirect_to @slide, notice: '追加しました'
     else
