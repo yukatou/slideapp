@@ -22,12 +22,27 @@ class SlidesController < ApplicationController
     @slide = Slide.new(params[:slide])
     @slide.user_id = current_user.id
 
-    puts params[:file].content_type
+    begin
+      file = params[:file]
+      ext = File.extname(file.original_filename)
+      @slide.save!
 
-    if @slide.save
+      path = 'tmp/slides/' + @slide.id.to_s 
+      filename =  @slide.id.to_s + ext
+      save_filename = path + '/' + filename
+
+      FileUtils.mkdir_p(path)
+      File.open(save_filename, 'wb') do |f|
+        f.write(file.read)
+      end
+
+      @slide.update_attributes!(:path => path, :origin => filename)
+      Resque.enqueue(Converter, @slide.id)
+
       redirect_to @slide, notice: '追加しました'
-    else
-      render action: "new"
+    rescue => e
+      puts e.message
+      render action: "new", error: e.message
     end
   end
 end
