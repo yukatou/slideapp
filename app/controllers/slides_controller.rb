@@ -13,6 +13,7 @@ class SlidesController < ApplicationController
     end
   end
 
+
   def new
     @slide = Slide.new()
   end
