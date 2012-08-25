@@ -1,6 +1,10 @@
-<% if @slides.any? %>
-  <% @slides.each do |slide| %>
-    $(".slides_list").append("<%= j(render 'slide_in_list', :slide => slide) %>");
-  <% end %>
-  $(".slide_in_list").wookmark({container: $(".slides_list"), itemWidth: 105});
+<% if @slides.count != 30 %>
+$(document).unbind();
 <% end %>
+
+<% @slides.each do |slide| %>
+  $(".slides_list").append("<%= j(render 'slide_in_list', :slide => slide) %>");
+<% end %>
+$(".slides_list img").imagesLoaded(function(){
+  $(".slide_in_list").wookmark({container: $(".slides_list"), itemWidth: 105});
+});

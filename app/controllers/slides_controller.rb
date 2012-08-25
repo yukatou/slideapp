@@ -6,11 +6,8 @@ class SlidesController < ApplicationController
     respond_to do |format|
       format.html
       format.json { render json: @slides }
+      format.js { render "add_next" }
     end
-  end
-
-  def add_next
-    @slides = Slide.where(:status => 200).order("id DESC").page(params[:page]).per(30)
   end
 
   def show

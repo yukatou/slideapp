@@ -4,23 +4,18 @@
 page = 2
 addNext = ->
   $.ajax({
-    url: "/slides/add_next"
-    type: "post"
+    url: "/slides"
     dataType: "script"
     data: {"page": page}
-    success: (data) ->
-      page++
-      if data is ""
-        $(document).unbind()
+    # success: ->
+    #   page++
   })
 onScroll = (event) ->
   closeToBottom = ($(window).scrollTop() + $(window).height() > $(document).height() - 100)
   if closeToBottom
     addNext()
+    page++
 
 $ ->
   if document.getElementById("endless_scroll")
     $(document).bind('scroll', onScroll)
-  $("h2").click ->
-    $(document).unbind()
-
