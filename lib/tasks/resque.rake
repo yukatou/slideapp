@@ -40,6 +40,6 @@ namespace :resque do
   desc "Start workers"
   task :start_workers => :environment do
     #run_worker("*", 2)
-    run_worker("converter", 1)
+    run_worker("converter", 2)
   end
 end
