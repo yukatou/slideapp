@@ -9,6 +9,10 @@
 		this.width = 0;
 		this.height = 0;
 		this.sendCanvas = function( data ) { console.log("hogehoge") };
+		this.slideTop    = 0;
+		this.slideLeft   = 0; 
+		this.slideWidth  = 0; 
+		this.slideHeight = 0;
 
         // canvas用データ
         this.canvas_y = this.canvas.offset().top;
@@ -137,6 +141,11 @@
 
 			//console.log( iwidth + " " + iheight + " " + left + " " + " " + top + " " + width + " " + height );
 
+			this.slideTop    = top;
+			this.slideLeft   = left; 
+			this.slideWidth  = width; 
+			this.slideHeight = height;
+
 			this.context.drawImage( this.image, 0, 0, iwidth, iheight, left, top, width, height );
 		},
 
@@ -231,8 +240,13 @@
 
         mouseMove: function (e) {
 
-					//console.log(event.pageX - this.canvas.offset().left);
-            if (this.mouse_event && this.canvas_event) {
+			var xpos = event.pageX - this.canvas.offset().left;
+
+			if ( xpos < this.slideLeft ) {
+				return;
+			}
+            
+			if (this.mouse_event && this.canvas_event) {
 
                 var px = e.pageX - this.canvas_x;
                 var py = e.pageY - this.canvas_y;
@@ -283,7 +297,22 @@
         },
 
         touchMove: function() {
-            event.preventDefault();
+            
+			event.preventDefault();
+
+			var xpos = event.changedTouches[0].pageX - this.canvas.offset().left;
+			var ypos = event.changedTouches[0].pageY + this.canvas.offset().top;
+			console.log(ypos);
+
+			if ( xpos < this.slideLeft ) {
+				return;
+			}
+
+			if ( ypos > this.slideTop ) {
+
+				return;
+			}
+
             if (this.mouse_event && this.canvas_event) {
                var px = event.changedTouches[0].pageX - this.canvas_x;
                var py = event.changedTouches[0].pageY - this.canvas_y;

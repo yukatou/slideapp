@@ -41,3 +41,19 @@
     display: none;
   }
 }
+#slideMain {
+  position: relative;
+}
+#buttons {
+  bottom: 10px;
+  right: 10px;
+  position: absolute;
+  opacity: .2;
+  &:hover {
+    opacity: .7;
+  }
+}
+
+
+
+

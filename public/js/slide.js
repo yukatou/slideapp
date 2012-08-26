@@ -145,12 +145,12 @@
 	showCanvas.toggle( function() {
 		$("#slide-list").hide();
 		$("#canvas-menu").show();
-		$("#showCanvas").html("<i class='icon-th-list'></i> スライド")
+		$("#showCanvas").html("<i class='icon-th-list'></i>")
 		draw.setCanvas();
 	},function() {
 		$("#slide-list").show();
 		$("#canvas-menu").hide();
-		$("#showCanvas").html("<i class='icon-pencil'></i> 書く")
+		$("#showCanvas").html("<i class='icon-pencil'></i>")
 		draw.setCanvas();
 	} );
 

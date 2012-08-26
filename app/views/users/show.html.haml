@@ -2,8 +2,8 @@
   %h1= @user.name
   %div Email: #{@user.email if @user.email}
   %div Member since: #{@user.created_at.strftime("%Y/%m/%d")}
-.user_content.row
-  .user_slides.span9
+.user_content
+  .user_slides
     - if @queued_slides.any? or @slides.any?
       - if @queued_slides.any?
         %h2 変換待ちスライド(#{@queued_slides.count})
@@ -25,7 +25,3 @@
     - else
       %h2 まだスライドはありません
     = link_to "Create Slide", new_slide_path, :class => "btn btn-primary"
-  .span3
-    .content
-      %h2 test
-
