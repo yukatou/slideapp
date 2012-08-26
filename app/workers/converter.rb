@@ -37,12 +37,16 @@ class Converter
       # convert thumbnail 
       command = "#{convert} -density #{density} -geometry #{thumbnail_size} #{convert_file} #{thumbnail_files}"
       plog command
-      plog system(command)
+      unless system(command)
+        raise "failed convert"
+      end
       
       # convert image
       command = "#{convert} -density #{density} -geometry #{image_size} #{convert_file} #{image_files}"
       plog command
-      plog system(command)
+      unless system(command)
+        raise "failed convert"
+      end
       
       max = Dir::glob(glob_file).count
       for order in (1 .. max) do
