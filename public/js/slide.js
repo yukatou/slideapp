@@ -3,6 +3,7 @@
 		// 0: viewer
 		// 1: presenter
 	var slideTypeId = 0,
+		slideType, 
 
 		slideTypeList = {
 			viewer: 0,
@@ -45,7 +46,12 @@
 							pageId = 1;
 						}
 
-						drawImage( socket.getSlideUrl( pageId ) );
+						var slideUrl = socket.getSlideUrl( pageId );
+
+						if ( slideUrl !== null ) {
+							socket.setPageId( pageId );
+							drawImage( slideUrl );
+						}
 
 					} else {
 						drawImage( socket.current() );
@@ -60,8 +66,12 @@
 
 				receivePageId: function( data ) {
 
-					drawImage( socket.getSlideUrl( data.pageId ) );
+					var slideUrl = socket.getSlideUrl( data.pageId );
 
+					if ( slideUrl !== null ) {
+						socket.setPageId( data.pageId );
+						drawImage( slideUrl );
+					}
 				}
 			});
 
@@ -76,12 +86,18 @@
 
 		},
 
+		setHash = function () {
+			location.hash = '!/' + slideType + '/' + socket.getPageId();
+		}, 
+
 		drawImage = function( imageUrl ) {
 
 			if ( imageUrl === null ) {
 
 				return;
 			}
+
+			setHash();
 
 			draw.setImage( imageUrl );
 		},
@@ -103,6 +119,8 @@
 			}
 
 			if ( slideTypeList[hashList[0]] !== undefined ) {
+
+				slideType = hashList[0];
 
 				slideTypeId = slideTypeList[hashList[0]];
 
@@ -198,6 +216,25 @@
 		} else if ( code === 39 ) {
 			drawImage( socket.next() );
 		}
+	} );
+
+	var index = 1;
+	jQuery( '#sidebar tr' ).each( function() {
+
+		var pageId = jQuery( this ).data( 'index', index++ );
+	});
+
+	jQuery( '#sidebar tr' ).click( function () {
+
+		var pageId = jQuery( this ).data( 'index' );
+
+		var slideUrl = socket.getSlideUrl( pageId );
+
+		if ( slideUrl !== null ) {
+			socket.setPageId( pageId );
+			drawImage( slideUrl );
+		}
+
 	} );
 
 	init();

@@ -159,6 +159,17 @@
 
 			return null;
 		}, 
+		
+		setPageId: function ( pageId ) {
+
+			this.pageId = pageId;
+		}, 
+
+		getPageId: function () {
+
+			return this.pageId;
+		}, 
+
 		getCurrentView: function () {
 
 			return this.currentView;
