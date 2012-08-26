@@ -15,15 +15,15 @@ class Converter
     
     begin 
       slide = Slide.find(slide_id)
-      origin = '%s/%s/%s' % [Rails.root, slide.path, slide.origin]
+      origin = '%s/public/%s/%s' % [Rails.root, slide.path, slide.origin]
       plog "#{slide.id}  #{origin}" 
 
       raise unless File.exists?(origin)
 
-      convert_file = '%s/%s/%d.pdf' % [Rails.root, slide.path, slide.id]
-      image_files = '%s/%s/%s' % [Rails.root, slide.path, '%03d.jpg']
-      thumbnail_files = '%s/%s/%s' % [Rails.root, slide.path, '%03d_thm.jpg']
-      glob_file = '%s/%s/%s' % [Rails.root, slide.path, '*_thm.jpg']
+      convert_file = '%s/public/%s/%d.pdf' % [Rails.root, slide.path, slide.id]
+      image_files = '%s/public/%s/%s' % [Rails.root, slide.path, '%03d.jpg']
+      thumbnail_files = '%s/public/%s/%s' % [Rails.root, slide.path, '%03d_thm.jpg']
+      glob_file = '%s/public/%s/%s' % [Rails.root, slide.path, '*_thm.jpg']
 
       # convert ppt
       plog "#{JAVA} -jar /home/yukatou/src/jodconverter-core-3.0-beta-4/lib/jodconverter-core-3.0-beta-4.jar #{origin} #{convert_file}"

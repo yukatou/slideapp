@@ -32,11 +32,12 @@ class SlidesController < ApplicationController
       @slide.save!
 
       ext = File.extname(file.original_filename)
-      path = 'public/data/' + @slide.id.to_s
+      path = 'data/' + @slide.id.to_s
+      dir = 'public/' + path
       filename =  @slide.id.to_s + ext
-      save_filename = path + '/' + filename
+      save_filename = 'public/' + path + '/' + filename
 
-      FileUtils.mkdir_p(path)
+      FileUtils.mkdir_p(dir)
       File.open(save_filename, 'wb') do |f|
         f.write(file.read)
       end
