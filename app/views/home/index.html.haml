@@ -12,8 +12,7 @@
   .span9
     %h2 最近追加されたスライド
     %ul.slides_list
-      - @latest_slides.each do |slide|
-        = render "slides/slide_in_list", :slide => slide
+      = render "slides/slide_in_list", :slides => @latest_slides
   .span3
     .content
       %h2 test
