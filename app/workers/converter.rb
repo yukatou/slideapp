@@ -3,8 +3,6 @@
 
 SUCCESS_CODE = 200
 ERROR_CODE = -100
-THUMBNAIL_SIZE = 100
-IMAGE_SIZE = 720
 
 class Converter
   @queue = :converter
@@ -16,6 +14,9 @@ class Converter
       java = Constants.java
       convert = Constants.convert
       jodconverter = Constants.jodconverter
+      density = Constants.image.density
+      thumbnail_size = Constants.image.thumbnail_size
+      image_size = Constants.image.size
 
       slide = Slide.find(slide_id)
       origin = '%s/public/%s/%s' % [Rails.root, slide.path, slide.origin]
@@ -29,21 +30,20 @@ class Converter
       glob_file = '%s/public/%s/%s' % [Rails.root, slide.path, '*_thm.jpg']
 
       # convert ppt
-      plog "#{java} -jar #{jodconverter} #{origin} #{convert_file}"
-      res = system("#{java} -jar #{jodconverter} #{origin} #{convert_file}")
-      plog res
+      command = "#{java} -jar #{jodconverter} #{origin} #{convert_file}"
+      plog command
+      plog system(command)
 
       # convert thumbnail 
-      plog "#{convert} -density 600 -geometry #{THUMBNAIL_SIZE} #{convert_file} #{thumbnail_files}"
-      res = system("#{convert} -density 600 -geometry #{THUMBNAIL_SIZE} #{convert_file} #{thumbnail_files}")
-      plog res
+      command = "#{convert} -density #{density} -geometry #{thumbnail_size} #{convert_file} #{thumbnail_files}"
+      plog command
+      plog system(command)
       
       # convert image
-      plog "#{convert} -density 600 -geometry #{IMAGE_SIZE} #{convert_file} #{image_files}"
-      res = system("#{convert} -density 600 -geometry #{IMAGE_SIZE} #{convert_file} #{image_files}")
-      plog res
+      command = "#{convert} -density #{density} -geometry #{image_size} #{convert_file} #{image_files}"
+      plog command
+      plog system(command)
       
-
       max = Dir::glob(glob_file).count
       for order in (1 .. max) do
         filename = '%03d.jpg' % [order - 1]
@@ -68,7 +68,7 @@ class Converter
   def self.plog(str)
       path = File.expand_path("log/convert.log", Rails.root)
       File.open(path, 'a') do |f|
-        f.puts str
+        f.puts "[%s] %s" % [Time.now, str]
       end
   end
 
