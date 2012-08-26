@@ -1,6 +1,6 @@
 - slides.each do |slide|
   %li.slide_in_list
-    %a{:href => slide_path(slide)}
+    %a{:href => current_user == slide.user ? slide_presenter_path(slide) : slide_path(slide)}
       - image = File.exist?("public/"+slide.path+"/000_thm.jpg") ? "/"+slide.path+"/000_thm.jpg": "converting.png"
       = image_tag image
       %h4= truncate_lines(slide.title, 24)
