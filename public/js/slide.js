@@ -166,10 +166,21 @@
 	$("#greenButton").click(function(){ draw.changeColor("green")});
 	$("#lineWidth").change(function(){ draw.changeLineWidth($("#lineWidth").val())});
 
+	jQuery( '#wrapper' ).bind( 'webkitfullscreenchange', function() {
+
+		jQuery( window ).resize();
+	} );
 
 	jQuery( window ).resize( function() {
 		jQuery( '#slide' ).width( jQuery('#slideMain').width() );
-		jQuery( '#slide' ).height( window.innerHeight - 210 );
+
+		var isFullScreen = document.mozFullScreen || document.webkitIsFullScreen;
+
+		if ( isFullScreen ) {
+			jQuery( '#slide' ).height( window.innerHeight - 10 );
+		} else {
+			jQuery( '#slide' ).height( window.innerHeight - 210 );
+		}
 
 		draw.resize( jQuery( '#slide' ).width(), jQuery( '#slide' ).height() );
 		jQuery( '#slide-list' ).height( jQuery('#slideMain').height() - 2 );
