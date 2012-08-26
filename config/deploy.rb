@@ -19,7 +19,7 @@ set :repository, "git@github.com:yukatou/slideapp.git"
 set :branch, "master"
 
 # Bundle
-set :bundle_cmd, "/home/u/bin/bundle"
+set :bundle_cmd, "/home/#{user}/.rbenv/shims/bundle"
 set :bundle_without, [:development, :test]
 
 # Deploy 
