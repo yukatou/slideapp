@@ -1,2 +1,40 @@
-%h1= @slide.title
-%p= @slide.description
+#wrapper
+  #container.container-fluid
+    .row-fluid
+      #sidebar.span2
+        #slide-list
+          %table.table.table-hover
+            %thead
+            %tbody
+              - 9.times do
+                %tr
+                  %td
+                    = image_tag "Desert.jpg"
+        #canvas-menu
+          TODO Canvas Menu
+      #main.span10
+        #slide
+          %div
+            %canvas#slidePage{:height => "550px"}
+        %div
+          %span#showCanvas.btn
+            %i.icon-pencil
+            書く
+          %span#clCanvas.btn
+            %i.icon-remove
+            canvas削除
+          %span.btn{:onclick => "slide.showSlide()"}
+            %i.icon-play
+            スライドショー
+          %span#prev.btn{:onclick => "slide.prevSlide()"}
+            %i.icon-chevron-left
+          %span#next.btn{:onclick => "slide.nextSlide()"}
+            %i.icon-chevron-right
+          %span#screen-button.btn{:onclick => "slide.enterFullscreen('wrapper')"}
+            %i.icon-fullscreen
+
+= javascript_include_tag "/js/socket.io.js"
+= javascript_include_tag "/js/socketManager.js"
+= javascript_include_tag "/js/draw.js"
+= javascript_include_tag "/js/slide.js"
+= javascript_include_tag "/js/test.js"

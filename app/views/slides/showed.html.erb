@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./css/slide.css" />
+</head>
+
+<body>
+    <div id="wrapper">
+        <div id="container" class="container-fluid">
+            <div class="row-fluid">
+                <div id="sidebar" class="span2">
+                    <div id="slide-list">
+                        <table class="table table-hover">
+                            <thead>
+                            </thead>
+                            <tbody>
+                                <tr><td><img src="./img/sample.png" /></td></tr>
+                                <tr><td><img src="./img/sample.png" /></td></tr>
+                                <tr><td><img src="./img/sample.png" /></td></tr>
+                                <tr><td><img src="./img/sample.png" /></td></tr>
+                                <tr><td><img src="./img/sample.png" /></td></tr>
+                                <tr><td><img src="./img/sample.png" /></td></tr>
+                                <tr><td><img src="./img/sample.png" /></td></tr>
+                                <tr><td><img src="./img/sample.png" /></td></tr>
+                                <tr><td><img src="./img/sample.png" /></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="canvas-menu">
+                        TODO Canvas Menu
+                    </div>
+                </div>
+                <div id="main" class="span10">
+                    <div id="slide-wrapper">
+                        <div id="slide" class="container">
+                            <canvas id="slidePage"></canvas>
+                        </div>
+                    </div>
+                    <div>
+						<span class="btn" id="showList" onclick="slide.showList()"><i class="icon-th-list"></i> リスト</span>
+						<span class="btn" id="showCanvas" onclick="slide.showCanvas()"><i class="icon-pencil"></i> canvas</span>
+                        <span class="btn" onclick="slide.showSlide()"><i class="icon-play"></i> スライドショー</span>
+						<span class="btn" id="clCanvas"><i class="icon-remove"></i> canvas削除</span>
+                        <span class="btn" id="prev" onclick="slide.prevSlide()"><i class="icon-chevron-left"></i></span>
+                        <span class="btn" id="next" onclick="slide.nextSlide()"><i class=" icon-chevron-right"></i></span>
+                        <span id="screen-button" class="btn" onclick="slide.enterFullscreen('wrapper')"><i class="icon-fullscreen"></i></span>
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+    <script src="./js/jquery-1.8.0.min.js"></script>
+    <script src="./js/socket.io.js"></script>
+    <script src="./js/socketManager.js"></script>
+    <script src="./js/draw.js"></script>
+    <script src="./js/slide.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/test.js"></script>
+</body>
+
+</html>
