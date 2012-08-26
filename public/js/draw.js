@@ -11,8 +11,8 @@
 		this.height = 0;
 		this.sendCanvas = function( data ) { console.log("hogehoge") };
 		this.slideTop    = 0;
-		this.slideLeft   = 0; 
-		this.slideWidth  = 0; 
+		this.slideLeft   = 0;
+		this.slideWidth  = 0;
 		this.slideHeight = 0;
 
         // canvas用データ
@@ -143,8 +143,8 @@
 			//console.log( iwidth + " " + iheight + " " + left + " " + " " + top + " " + width + " " + height );
 
 			this.slideTop    = top;
-			this.slideLeft   = left; 
-			this.slideWidth  = width; 
+			this.slideLeft   = left;
+			this.slideWidth  = width;
 			this.slideHeight = height;
 
 			this.context.drawImage( this.image, 0, 0, iwidth, iheight, left, top, width, height );
@@ -266,7 +266,7 @@
 
 				return;
 			}
-            
+
 			if (this.mouse_event && this.canvas_event) {
 
                 var px = e.pageX - this.canvas_x;
@@ -321,7 +321,7 @@
         },
 
         touchMove: function() {
-            
+
 			event.preventDefault();
 
 			var xpos = event.changedTouches[0].pageX - this.canvas.offset().left;
@@ -347,7 +347,7 @@
                this.context.stroke();
                this.ox = px;
                this.oy = py;
-               
+
 			   var minOx = this.ox / this.imgSizeX;
                var minOy = this.oy / this.imgSizeY;
 
@@ -391,19 +391,13 @@
 
                 if (data['i'] !== -1) {
                     this.context.strokeStyle = data['c'];
-<<<<<<< HEAD
                     this.context.lineWidth = data['w'];
-                    this.nodeOx = data['x'] * cwidth;
-                    this.nodeOy = data['y'] * cheight;
-=======
-                    this.context.lineWidth = 3;
-                    
+
 					//this.nodeOx = data['x'] * cwidth;
                     //this.nodeOy = data['y'] * cheight;
                     this.nodeOx = data['x'] * this.slideWidth + ( this.slideLeft );
                     this.nodeOy = data['y'] * this.slideHeight + ( this.slideTop );
 
->>>>>>> 9a7ba8363c15740866234c4bd92250c0a3f792b2
                     if (data['i'] == 0) {
                         this.context.moveTo(this.nodeOx,this.nodeOy);
                     } else {
