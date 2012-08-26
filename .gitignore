@@ -76,4 +76,4 @@ pickle-email-*.html
 
 
 # slides
-tmp/slides/
+/public/data/*
