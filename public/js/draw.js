@@ -98,8 +98,8 @@
 				type    = 0;
             this.imgSizeX = cwidth;
             this.imgSizeY = cheight;
-            console.log(cwidth);
-            console.log(cheight);
+            //console.log(cwidth);
+            //console.log(cheight);
 
             // 今まで記載してきた内容をクリア
             if (resizeflag !== 1) {
@@ -135,7 +135,7 @@
 				top = 0;
 			}
 
-			console.log( iwidth + " " + iheight + " " + left + " " + " " + top + " " + width + " " + height );
+			//console.log( iwidth + " " + iheight + " " + left + " " + " " + top + " " + width + " " + height );
 
 			this.context.drawImage( this.image, 0, 0, iwidth, iheight, left, top, width, height );
 		},
@@ -209,15 +209,15 @@
             } else {
                 this.canvas_event = false;
             }
-            console.log(this.canvas_event);
+            //console.log(this.canvas_event);
         },
 
         mouseDown: function (e) {
-                    console.log(event.offsetX);
+                    //console.log(event.offsetX);
             if (this.canvas_event) {
                this.ox = e.pageX - this.canvas_x;
-               console.log(e.pageX);
-               console.log(this.ox);
+               //console.log(e.pageX);
+               //console.log(this.ox);
 
                this.oy = e.pageY - this.canvas_y;
 
@@ -231,7 +231,7 @@
 
         mouseMove: function (e) {
 
-					console.log(event.pageX - this.canvas.offset().left);
+					//console.log(event.pageX - this.canvas.offset().left);
             if (this.mouse_event && this.canvas_event) {
 
                 var px = e.pageX - this.canvas_x;
