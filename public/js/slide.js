@@ -160,14 +160,12 @@
 
 
 	jQuery( window ).resize( function() {
-		jQuery( '#slide' ).width( jQuery('#main').width() );
-		jQuery( '#slide' ).height( window.innerHeight - 70 );
-		jQuery( '#slide-list' ).height($( '#main' ).height() );
+		jQuery( '#slide' ).width( jQuery('#slideMain').width() );
+		jQuery( '#slide' ).height( window.innerHeight - 210 );
+		jQuery( '#slide-list' ).height($( '#slideMain' ).height() );
 
 		draw.resize( jQuery( '#slide' ).width(), jQuery( '#slide' ).height() );
-		console.log( jQuery( '#slide' ).height() );
-		console.log( jQuery( '#slide' ).width() );
-		jQuery( '#slide-list' ).height( jQuery('#main').height() );
+		jQuery( '#slide-list' ).height( jQuery('#slideMain').height() );
 	} );
 
 	init();
