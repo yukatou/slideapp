@@ -14,16 +14,21 @@
         #canvas-menu
           %p Color
           %div
-            #blackButton.btn.changeColor
-            #whiteButton.btn.changeColor
-            #blueButton.btn.changeColor
-            #redButton.btn.changeColor
-            #orangeButton.btn.changeColor
-            #greenButton.btn.changeColor
+            #blackButton.btn.changeColor.selectedColor{:color => "black"}
+            #whiteButton.btn.changeColor{:color => "white"}
+            #blueButton.btn.changeColor{:color => "blue"}
+            #redButton.btn.changeColor{:color => "red"}
+            #orangeButton.btn.changeColor{:color => "orange"}
+            #greenButton.btn.changeColor{:color => "green"}
           %br
           %br
           %p Line width
           %input#lineWidth{:type => "range", :min => "1", :max => "8", :value => "3"}
+          %br
+          %br
+          #clCanvas.btn.btn-large
+            %i.icon-remove
+            消去
       #slideMain.span10
         #slide
           %div
@@ -31,8 +36,6 @@
         #buttons
           #showCanvas.btn.btn-large
             %i.icon-pencil
-          #clCanvas.btn.btn-large
-            %i.icon-remove
           / .btn.btn-large{:onclick => "slide.showSlide()"}
           /   %i.icon-play
           #prev.btn.btn-large{:onclick => "slide.prevSlide()"}
@@ -41,7 +44,8 @@
             %i.icon-chevron-right
           #screen-button.btn.btn-large
             %i.icon-fullscreen
-#for_js{:own => "#{@slide.user.id}", :current => "#{current_user.id}"}
+
+#for_js{:own => "#{@slide.user.id}", :current => "#{user_signed_in? ? current_user.id : 0}"}
 :javascript
   $(document).ready(function() {
     if (document.URL.indexOf("presenter") != -1) {
