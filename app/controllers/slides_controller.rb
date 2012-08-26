@@ -45,7 +45,7 @@ class SlidesController < ApplicationController
       @slide.update_attributes!(:path => path, :origin => filename)
       Resque.enqueue(Converter, @slide.id)
 
-      redirect_to @slide, notice: '追加しました'
+      redirect_to user_path(current_user), notice: '追加しました'
     rescue => e
       puts e.message
       render action: "new", alert: e.message

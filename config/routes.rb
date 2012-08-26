@@ -1,4 +1,6 @@
 Slideapp::Application.routes.draw do
+  devise_for :users
+
   get "slides/:id/\#!/viewer" => "slides#show", :as => "slide"
   get "slides/:id/\#!/presenter" => "slides#show", :as => "slide_presenter"
   post "slides/search"
@@ -6,7 +8,6 @@ Slideapp::Application.routes.draw do
 
   resources :users, :only => [:show, :index]
 
-  devise_for :users
   resources :slides
 
   authenticated :user do
