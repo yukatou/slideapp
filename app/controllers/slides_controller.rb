@@ -54,6 +54,16 @@ class SlidesController < ApplicationController
     end
   end
 
+  def edit
+    @slide = Slide.find(params[:id])
+  end
+
+  def update
+    @slide = Slide.find(params[:id])
+    @slide.update_attributes(params[:slide])
+    redirect_to  user_path(current_user), notice: '編集しました'
+  end
+
   def destroy
     @slide = Slide.find(params[:id])
     @slide.destroy

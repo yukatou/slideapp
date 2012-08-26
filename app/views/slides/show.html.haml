@@ -6,10 +6,12 @@
           %table.table.table-hover
             %thead
             %tbody
-              - 9.times do
+              - @slide.pages.each do |page|
                 %tr
                   %td
-                    = image_tag "Desert.jpg"
+                    - image slide.path & page.filename ? "/" + slide.path + page.filename : "Desert.jpg"
+                    logger.debug image
+                    = image_tag image
         #canvas-menu
           TODO Canvas Menu
       #main.span10

@@ -6,12 +6,14 @@ Slideapp::Application.routes.draw do
   post "slides/search"
   get "slides/:id/pages" => "slides#pages"
 
-  resources :users, :only => [:show, :index]
 
   resources :slides
 
   authenticated :user do
     root :to => 'home#index'
   end
+
+  resources :users, :only => [:show, :index]
+
   root :to => "home#index"
 end
