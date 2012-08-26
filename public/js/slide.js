@@ -158,6 +158,14 @@
 		draw.clear();
 	} );
 
+	$("#blackButton").click(function(){ draw.changeColor("black")});
+	$("#whiteButton").click(function(){ draw.changeColor("white")});
+	$("#redButton").click(function(){ draw.changeColor("red")});
+	$("#blueButton").click(function(){ draw.changeColor("blue")});
+	$("#orangeButton").click(function(){ draw.changeColor("orange")});
+	$("#greenButton").click(function(){ draw.changeColor("green")});
+	$("#lineWidth").change(function(){ draw.changeLineWidth($("#lineWidth").val())});
+
 
 	jQuery( window ).resize( function() {
 		jQuery( '#slide' ).width( jQuery('#slideMain').width() );

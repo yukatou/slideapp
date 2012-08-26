@@ -1,4 +1,5 @@
 ( function( window, document, jQuery, undefined ) {
+    var first = true;
 
     var Draw = function( idName ) {
 
@@ -183,8 +184,8 @@
                 var drowPointDataList = this.drowPointData[i].length;
                 for (k = 0; k < drowPointDataList; k++) {
                     if (this.drowPointData[i][k]['i'] !== -1) {
-                        this.context.strokeStyle = this.drowPointData[i][k]['rgba'];
-                        this.context.lineWidth = 3;
+                        this.context.strokeStyle = this.drowPointData[i][k]['c'];
+                        this.context.lineWidth = this.drowPointData[i][k]['w'];
                         ox = this.drowPointData[i][k]['x'] * width;
                         oy = this.drowPointData[i][k]['y'] * height;
                         if (this.drowPointData[i][k]['i'] == 0) {
@@ -200,12 +201,17 @@
                 }
             }
 
-            this.refresh(width, height, false);
+            this.refresh(width, height, true);
 		},
 
         setCanvas: function() {
             if (this.canvas_event === false) {
                 this.canvas_event = true;
+                if (first) {
+                    this.context.beginPath();
+                    this.context.lineWidth = 3;
+                    first = false;
+                }
             } else {
                 this.canvas_event = false;
             }
@@ -236,8 +242,8 @@
 
                 var px = e.pageX - this.canvas_x;
                 var py = e.pageY - this.canvas_y;
-                this.context.strokeStyle = "#554466";
-                this.context.lineWidth   = 3;
+                // this.context.strokeStyle = "#FF0000";
+                // this.context.lineWidth   = 3;
                 this.context.moveTo(this.ox, this.oy);
                 this.context.lineTo(px, py);
                 this.context.closePath();
@@ -249,7 +255,7 @@
                 var minOy = this.oy / this.imgSizeY;
 
                 var index = this.tmp.length;
-                var drawData = {"t":"draw", "x":minOx, "y":minOy, "i":index, "c":this.context.strokeStyle};
+                var drawData = {"t":"draw", "x":minOx, "y":minOy, "i":index, "c":this.context.strokeStyle, "w": this.context.lineWidth};
                 this.tmp.push(drawData);
                 if (this.canvas.width() -10 < px) {
                     this.mouse_event = false;
@@ -262,7 +268,7 @@
         mouseUp: function() {
             if (this.canvas_event) {
                 this.mouse_event = false;
-                var drawData = {"t":"draw", "x":0, "y":0, "i":-1, "c":this.context.strokeStyle};
+                var drawData = {"t":"draw", "x":0, "y":0, "i":-1, "c":this.context.strokeStyle, "w": this.context.lineWidth};
                 this.tmp.push(drawData);
                 this.drowPointData[this.drowPointDataKey] = this.tmp;
                 this.tmp = [];
@@ -287,8 +293,8 @@
             if (this.mouse_event && this.canvas_event) {
                var px = event.changedTouches[0].pageX - this.canvas_x;
                var py = event.changedTouches[0].pageY - this.canvas_y;
-               this.context.strokeStyle = "#FF0000";
-               this.context.lineWidth = 3;
+               // this.context.strokeStyle = "#FF0000";
+               // this.context.lineWidth = 3;
                this.context.moveTo(this.ox, this.oy);
                this.context.lineTo(px, py);
                this.context.closePath();
@@ -298,7 +304,7 @@
                var minOx = this.ox / this.imgSizeX;
                var minOy = this.oy / this.imgSizeY;
                var index = this.tmp.length;
-               var drawData = {"t":"draw", "x":minOx, "y":minOy, "i":index, "c":this.context.strokeStyle};
+               var drawData = {"t":"draw", "x":minOx, "y":minOy, "i":index, "c":this.context.strokeStyle, "w": this.context.lineWidth};
                this.tmp.push(drawData);
                 if (this.canvas.width() -10 < px) {
                     this.mouse_event = false;
@@ -312,7 +318,7 @@
         touchEnd: function() {
             if (this.canvas_event) {
                 this.mouse_event = false;
-                var drawData = {"t":'draw', "x":0, "y":0, "i":-1, "c":this.context.strokeStyle};
+                var drawData = {"t":'draw', "x":0, "y":0, "i":-1, "c":this.context.strokeStyle, "w": this.context.lineWidth};
                 this.tmp.push(drawData);
                 this.drowPointData[this.drowPointDataKey] = this.tmp;
                 this.tmp = [];
@@ -334,7 +340,7 @@
 
                 if (data['i'] !== -1) {
                     this.context.strokeStyle = data['c'];
-                    this.context.lineWidth = 3;
+                    this.context.lineWidth = data['w'];
                     this.nodeOx = data['x'] * cwidth;
                     this.nodeOy = data['y'] * cheight;
                     if (data['i'] == 0) {
@@ -357,6 +363,16 @@
             } else {
                 this.clear();
             }
+        },
+
+        changeColor: function (color) {
+            this.context.beginPath();
+            this.context.strokeStyle = color;
+        },
+
+        changeLineWidth: function (value) {
+            this.context.beginPath();
+            this.context.lineWidth = Number(value);
         }
     }
 
