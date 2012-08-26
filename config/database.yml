@@ -14,8 +14,8 @@ development:
   reconnect: false
   database: slideapp_development
   pool: 5
-  username: u3u 
-  password: kitaki
+  username: yukatou 
+  password: yukatou
   host: localhost
 
 # Warning: The database defined as "test" will be erased and
