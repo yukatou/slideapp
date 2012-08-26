@@ -1,49 +1,53 @@
-#wrapper
-  #container.container-fluid
-    .row-fluid
-      #sidebar.span2
-        #slide-list
-          %table.table.table-hover
-            %thead
-            %tbody
-              - @slide.pages.each do |page|
-                %tr
-                  %td
-                    - image = @slide.path && page.filename ? "/" + @slide.path + "/" + page.thm_filename : "Desert.jpg"
-                    = image_tag image
-        #canvas-menu
-          %p Color
-          %div
-            #blackButton.btn.changeColor.selectedColor{:color => "black"}
-            #whiteButton.btn.changeColor{:color => "white"}
-            #blueButton.btn.changeColor{:color => "blue"}
-            #redButton.btn.changeColor{:color => "red"}
-            #orangeButton.btn.changeColor{:color => "orange"}
-            #greenButton.btn.changeColor{:color => "green"}
+#container.container-fluid
+  #wrapper.row-fluid
+    #sidebar.span2
+      #slide-list
+        %table.table.table-hover
+          %thead
+          %tbody
+            %tr
+              %td
+                = image_tag "Desert.jpg"
+            - @slide.pages.each do |page|
+              %tr
+                %td
+                  - image = @slide.path && page.filename ? "/" + @slide.path + "/" + page.thm_filename : "Desert.jpg"
+                  = image_tag image
+      #canvas-menu
+        %p Color
+        %div
+          #blackButton.btn.changeColor.selectedColor{:color => "black"}
+          #whiteButton.btn.changeColor{:color => "white"}
           %br
+          #blueButton.btn.changeColor{:color => "blue"}
+          #redButton.btn.changeColor{:color => "red"}
           %br
-          %p Line width
-          %input#lineWidth{:type => "range", :min => "1", :max => "8", :value => "3"}
-          %br
-          %br
-          #clCanvas.btn.btn-large
-            %i.icon-remove
-            消去
-      #slideMain.span10
-        #slide
-          %div
-            %canvas#slidePage{:height => "550px"}
-        #buttons
-          #showCanvas.btn.btn-large
-            %i.icon-pencil
-          / .btn.btn-large{:onclick => "slide.showSlide()"}
-          /   %i.icon-play
-          #prev.btn.btn-large{:onclick => "slide.prevSlide()"}
-            %i.icon-chevron-left
-          #next.btn.btn-large{:onclick => "slide.nextSlide()"}
-            %i.icon-chevron-right
-          #screen-button.btn.btn-large
-            %i.icon-fullscreen
+          #orangeButton.btn.changeColor{:color => "orange"}
+          #greenButton.btn.changeColor{:color => "green"}
+        %br
+        %br
+        %p Line width
+        %input#lineWidth{:type => "range", :min => "1", :max => "8", :value => "3"}
+        %br
+        %br
+        #clCanvas.btn.btn-large
+          %i.icon-remove
+          消去
+    #slideMain.span10
+      #slide
+        %div
+          %canvas#slidePage{:height => "550px"}
+      #buttons
+        #showCanvas.btn.btn-large
+          %i.icon-pencil
+        / .btn.btn-large{:onclick => "slide.showSlide()"}
+        /   %i.icon-play
+        #prev.btn.btn-large{:onclick => "slide.prevSlide()"}
+          %i.icon-chevron-left
+        #next.btn.btn-large{:onclick => "slide.nextSlide()"}
+          %i.icon-chevron-right
+        #screen-button.btn.btn-large
+          %i.icon-fullscreen
 
 #for_js{:own => "#{@slide.user.id}", :current => "#{user_signed_in? ? current_user.id : 0}"}
 :javascript

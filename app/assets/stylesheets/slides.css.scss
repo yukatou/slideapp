@@ -46,17 +46,25 @@
     display: none;
   }
 }
+#sidebar {
+  background: #444;
+}
 #slide-list {
   overflow-y: scroll;
-  border: 1px solid #aaa;
+  .table td:first-of-type {
+    border-top: 0;
+  }
 }
 #canvas-menu{
+  text-align: center;
+  color: white;
   display: none;
+  padding: 10px;
 }
 
 #slideMain {
   position: relative;
-  border: 1px solid #aaa;
+  border: 1px solid #444;
 }
 #slide {
   width: 100%;
@@ -72,7 +80,7 @@
   }
 }
 .changeColor {
-  width: 20px;
+  width: 15px;
   height: 20px;
   margin-bottom: 5px;
 }

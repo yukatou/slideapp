@@ -3,7 +3,7 @@
 		// 0: viewer
 		// 1: presenter
 	var slideTypeId = 0,
-		slideType, 
+		slideType,
 
 		slideTypeList = {
 			viewer: 0,
@@ -88,7 +88,7 @@
 
 		setHash = function () {
 			location.hash = '!/' + slideType + '/' + socket.getPageId();
-		}, 
+		},
 
 		drawImage = function( imageUrl ) {
 
@@ -177,7 +177,7 @@
 	} );
 
 	$("#screen-button").toggle(function(){
-		slide.enterFullscreen('slideMain');
+		slide.enterFullscreen('wrapper');
 	},function() {
 		slide.exitFullscreen();
 	});
@@ -199,13 +199,13 @@
 	jQuery( window ).resize( function() {
 		var isFullScreen = document.mozFullScreen || document.webkitIsFullScreen;
 		if ( isFullScreen ) {
-			jQuery( '#slideMain' ).height( window.innerHeight - 10 );
+			jQuery( '#slideMain' ).height( window.innerHeight);
 		} else {
 			jQuery( '#slideMain' ).height( window.innerHeight - 180 );
 		}
 
 		draw.resize( jQuery( '#slide' ).width(), jQuery( '#slide' ).height() );
-		jQuery( '#slide-list' ).height( jQuery('#slideMain').height() - 2 );
+		jQuery( '#sidebar' ).height( jQuery('#slideMain').height()+2);
 	} );
 
 	jQuery( window ).keyup( function( event ) {
