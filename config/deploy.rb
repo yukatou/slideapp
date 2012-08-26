@@ -5,7 +5,8 @@ set :scm_user do Capistrano::CLI.ui.ask("scm user:") end
 set :scm_password do Capistrano::CLI.password_prompt("scm pass:") end
 
 set :default_environment, {
-  "PATH" => "$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH",
+  #"PATH" => "$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH",
+  "PATH" => "/home/u/bin:$PATH"
 }
 
 # ssh
@@ -19,7 +20,7 @@ set :repository, "git@github.com:yukatou/slideapp.git"
 set :branch, "master"
 
 # Bundle
-set :bundle_cmd, "/home/#{user}/.rbenv/shims/bundle"
+set :bundle_cmd, "/home/u/bin/bundle"
 set :bundle_without, [:development, :test]
 
 # Deploy 
