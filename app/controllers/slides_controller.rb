@@ -27,6 +27,8 @@ class SlidesController < ApplicationController
     @slide = Slide.new(params[:slide])
     @slide.user_id = current_user.id
 
+    puts Constants.java
+
     begin
       file = params[:file]
       @slide.save!

@@ -10,11 +10,13 @@ class Converter
   @queue = :converter
 
   def self.perform(slide_id)
-    java = Constants.java
-    convert = Constants.convert
-    jodconverter = Constants.jodconverter
     
     begin 
+      plog Constants.java 
+      java = Constants.java
+      convert = Constants.convert
+      jodconverter = Constants.jodconverter
+
       slide = Slide.find(slide_id)
       origin = '%s/public/%s/%s' % [Rails.root, slide.path, slide.origin]
       plog "#{slide.id}  #{origin}" 
