@@ -83,8 +83,8 @@ class SlidesController < ApplicationController
     hash = {"slide_id"=> slide.id, "user_id"=> slide.user.id, "data" => {}}
     Page.where(:slide_id => params[:id]).each do |page|
       hash["data"][page.order] = {
-        "url"=> root_url + slide.path + page.filename,
-        "url_thm"=> root_url + slide.path + page.thm_filename
+        "url"=> root_url + slide.path + "/" + page.filename,
+        "url_thm"=> root_url + slide.path + "/" + page.thm_filename
       }
     end
     render json: hash
