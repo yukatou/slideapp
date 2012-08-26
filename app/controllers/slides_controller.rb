@@ -26,19 +26,30 @@ class SlidesController < ApplicationController
   def create
     @slide = Slide.new(params[:slide])
     @slide.user_id = current_user.id
+    begin
 
-    puts Constants.java
+      raise 'ファイルが選択されてません' unless params[:file]
+
+      file = params[:file]
+      ext = File.extname(file.original_filename).downcase
+      max_size = Constants.upload_max_size.to_i
+      # validation
+      raise '拡張子が正しくありません' unless %w(.ppt .pptx .odp).include?(ext)
+      raise 'アップロードできるのは#{max_size}MBまでです' if file.size > max_size.megabyte
+    rescue => e
+      flash[:alert] = e.message
+      render action: "new"
+      return
+    end
 
     begin
-      file = params[:file]
       @slide.save!
 
-      ext = File.extname(file.original_filename)
       path = 'data/' + @slide.id.to_s
       dir = 'public/' + path
       filename =  @slide.id.to_s + ext
       save_filename = 'public/' + path + '/' + filename
-
+      
       FileUtils.mkdir_p(dir)
       File.open(save_filename, 'wb') do |f|
         f.write(file.read)
@@ -46,12 +57,17 @@ class SlidesController < ApplicationController
 
       @slide.update_attributes!(:path => path, :origin => filename)
       Resque.enqueue(Converter, @slide.id)
-
-      redirect_to user_path(current_user), notice: '追加しました'
+    rescue ActiveRecord::RecordInvalid
+      flash[:alert] = '入力値が正しくありません'
+      render action: "new"
+      return
     rescue => e
-      puts e.message
-      render action: "new", alert: e.message
+      flash[:alert] = e.message 
+      render action: "new"
+      return
     end
+
+    redirect_to user_path(current_user), notice: '追加しました'
   end
 
   def edit
