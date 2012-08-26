@@ -1,9 +1,9 @@
 defaults: &defaults
 
 development:
-  java: /usr/java/latest/bin/java
+  java: /usr/bin/java
   convert: /usr/bin/convert
-  jodconverter: /home/yukatou/src/jodconverter-core-3.0-beta-4/lib/jodconverter-core-3.0-beta-4.jar
+  jodconverter: /opt/jodconverter-core-3.0-beta-4/lib/jodconverter-core-3.0-beta-4.jar
 production:
   java: /usr/bin/java
   convert: /usr/bin/convert
