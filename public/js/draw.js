@@ -10,6 +10,10 @@
 		this.width = 0;
 		this.height = 0;
 		this.sendCanvas = function( data ) { console.log("hogehoge") };
+		this.slideTop    = 0;
+		this.slideLeft   = 0; 
+		this.slideWidth  = 0; 
+		this.slideHeight = 0;
 
         // canvas用データ
         this.canvas_y = this.canvas.offset().top;
@@ -138,7 +142,15 @@
 
 			//console.log( iwidth + " " + iheight + " " + left + " " + " " + top + " " + width + " " + height );
 
+			this.slideTop    = top;
+			this.slideLeft   = left; 
+			this.slideWidth  = width; 
+			this.slideHeight = height;
+
 			this.context.drawImage( this.image, 0, 0, iwidth, iheight, left, top, width, height );
+
+			this.canvas_y = this.canvas.offset().top;
+			this.canvas_x = this.canvas.offset().left;
 		},
 
 		refresh: function(width, height, canvasMigFlag) {
@@ -237,8 +249,25 @@
 
         mouseMove: function (e) {
 
-					//console.log(event.pageX - this.canvas.offset().left);
-            if (this.mouse_event && this.canvas_event) {
+			var xpos = event.pageX - this.canvas.offset().left;
+
+			if ( xpos < this.slideLeft ) {
+				return;
+			}
+
+			var xpos = event.pageX - this.canvas.offset().left;
+			var ypos = event.pageY - this.canvas.offset().top;
+
+			if ( xpos < this.slideLeft || xpos > ( this.slideLeft + this.slideWidth ) ) {
+				return;
+			}
+
+			if ( ypos < this.slideTop || ypos > ( this.slideTop + this.slideHeight ) ) {
+
+				return;
+			}
+            
+			if (this.mouse_event && this.canvas_event) {
 
                 var px = e.pageX - this.canvas_x;
                 var py = e.pageY - this.canvas_y;
@@ -253,6 +282,9 @@
 
                 var minOx = this.ox / this.imgSizeX;
                 var minOy = this.oy / this.imgSizeY;
+
+               var minOx = ( this.ox - this.slideLeft ) / this.slideWidth;
+               var minOy = ( this.oy - this.slideTop ) / this.slideHeight;
 
                 var index = this.tmp.length;
                 var drawData = {"t":"draw", "x":minOx, "y":minOy, "i":index, "c":this.context.strokeStyle, "w": this.context.lineWidth};
@@ -289,7 +321,21 @@
         },
 
         touchMove: function() {
-            event.preventDefault();
+            
+			event.preventDefault();
+
+			var xpos = event.changedTouches[0].pageX - this.canvas.offset().left;
+			var ypos = event.changedTouches[0].pageY - this.canvas.offset().top;
+
+			if ( xpos < this.slideLeft || xpos > ( this.slideLeft + this.slideWidth ) ) {
+				return;
+			}
+
+			if ( ypos < this.slideTop || ypos > ( this.slideTop + this.slideHeight ) ) {
+
+				return;
+			}
+
             if (this.mouse_event && this.canvas_event) {
                var px = event.changedTouches[0].pageX - this.canvas_x;
                var py = event.changedTouches[0].pageY - this.canvas_y;
@@ -301,8 +347,13 @@
                this.context.stroke();
                this.ox = px;
                this.oy = py;
-               var minOx = this.ox / this.imgSizeX;
+               
+			   var minOx = this.ox / this.imgSizeX;
                var minOy = this.oy / this.imgSizeY;
+
+               var minOx = ( this.ox - this.slideLeft ) / this.slideWidth;
+               var minOy = ( this.oy - this.slideTop ) / this.slideHeight;
+
                var index = this.tmp.length;
                var drawData = {"t":"draw", "x":minOx, "y":minOy, "i":index, "c":this.context.strokeStyle, "w": this.context.lineWidth};
                this.tmp.push(drawData);
@@ -340,9 +391,19 @@
 
                 if (data['i'] !== -1) {
                     this.context.strokeStyle = data['c'];
+<<<<<<< HEAD
                     this.context.lineWidth = data['w'];
                     this.nodeOx = data['x'] * cwidth;
                     this.nodeOy = data['y'] * cheight;
+=======
+                    this.context.lineWidth = 3;
+                    
+					//this.nodeOx = data['x'] * cwidth;
+                    //this.nodeOy = data['y'] * cheight;
+                    this.nodeOx = data['x'] * this.slideWidth + ( this.slideLeft );
+                    this.nodeOy = data['y'] * this.slideHeight + ( this.slideTop );
+
+>>>>>>> 9a7ba8363c15740866234c4bd92250c0a3f792b2
                     if (data['i'] == 0) {
                         this.context.moveTo(this.nodeOx,this.nodeOy);
                     } else {

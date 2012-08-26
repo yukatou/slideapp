@@ -170,10 +170,9 @@
 	jQuery( window ).resize( function() {
 		jQuery( '#slide' ).width( jQuery('#slideMain').width() );
 		jQuery( '#slide' ).height( window.innerHeight - 210 );
-		jQuery( '#slide-list' ).height($( '#slideMain' ).height() );
 
 		draw.resize( jQuery( '#slide' ).width(), jQuery( '#slide' ).height() );
-		jQuery( '#slide-list' ).height( jQuery('#slideMain').height() );
+		jQuery( '#slide-list' ).height( jQuery('#slideMain').height() - 2 );
 	} );
 
 	init();
