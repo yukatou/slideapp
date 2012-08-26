@@ -7,7 +7,7 @@
     %title= content_for?(:title) ? yield(:title) : "Slideapp"
     %meta{:content => "", :name => "description"}
     %meta{:content => "", :name => "author"}
-    = favicon_link_tag
+    = favicon_link_tag "favicon.ico"
     = stylesheet_link_tag "http://fonts.googleapis.com/css?family=Coustard"
     = stylesheet_link_tag "application", :media => "all"
     = javascript_include_tag "application"
