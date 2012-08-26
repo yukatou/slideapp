@@ -390,6 +390,7 @@
                 cheight = this.canvas.height();
 
                 if (data['i'] !== -1) {
+                    this.context.beginPath();
                     this.context.strokeStyle = data['c'];
                     this.context.lineWidth = data['w'];
 
