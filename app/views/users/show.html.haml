@@ -10,14 +10,14 @@
         %ul.queued_slides_list
           - @queued_slides.each do |slide|
             %li.queued_slide_in_list
-              = image_tag "converting.png", :width => "95"
+              = image_tag "converting.png"
               %h4= slide.title
               %p= slide.description
           - @error_slides.each do |slide|
             %li.queued_slide_in_list.error_slide
               %a{:href => slide_path(slide), "data-method" => :delete}
                 .close_btn ×
-              = image_tag "convert_error.png", :width => "95"
+              = image_tag "convert_error.png"
               %h4= slide.title
               %p= slide.description
       %h2 スライド(#{@slides.count})
