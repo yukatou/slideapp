@@ -27,5 +27,3 @@ gem "settingslogic"
 gem 'capistrano', :group => [:development]
 gem 'capistrano-ext', :group => [:development]
 gem 'capistrano_colors', :group => [:development]
-gem 'capistrano-resque', :group => [:development]
-

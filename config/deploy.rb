@@ -23,9 +23,6 @@ set :branch, "master"
 set :bundle_cmd, "/home/u/bin/bundle"
 set :bundle_without, [:development, :test]
 
-# Resque
-set :workers, { "converter" => 2 }
-
 # Deploy 
 set :deploy_via, :copy
 after :deploy, "deploy:cleanup"
@@ -34,7 +31,6 @@ after "deploy:setup" do
     mkdir -p "#{shared_path}/run"
   CMD
 end
-after "deploy:restart", "resque:restart"
 
 namespace :deploy do
   task :start, :roles => :app, :except => { :no_release => true } do
@@ -57,4 +53,28 @@ namespace :deploy do
   task :seed do
     run "cd #{current_path} && /usr/bin/env bundle exec rake db:seed RAILS_ENV=#{rails_env}"
   end
+  
+  desc "Restart Resque Workers"
+  task :restart_workers, :roles => :db do
+    run_remote_rake "resque:restart_workers"
+  end
 end
+
+
+
+after "deploy:symlink", "deploy:restart_workers"
+
+##
+# Rake helper task.
+# http://pastie.org/255489
+# http://geminstallthat.wordpress.com/2008/01/27/rake-tasks-through-capistrano/
+# http://ananelson.com/said/on/2007/12/30/remote-rake-tasks-with-capistrano/
+def run_remote_rake(rake_cmd)
+  rake_args = ENV['RAKE_ARGS'].to_s.split(',')
+  cmd = "cd #{fetch(:latest_release)} && #{fetch(:rake, "rake")} RAILS_ENV=#{fetch(:rails_env, "production")} #{rake_cmd}"
+  cmd += "['#{rake_args.join("','")}']" unless rake_args.empty?
+  run cmd
+  set :rakefile, nil if exists?(:rakefile)
+end
+
+

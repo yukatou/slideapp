@@ -2,8 +2,6 @@
 require "capistrano/ext/multistage"
 # デプロイ時にbundle install実行する
 require 'bundler/capistrano'
-# resque
-require "capistrano-resque"
 
 load 'deploy'
 
