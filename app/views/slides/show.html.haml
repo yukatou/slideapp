@@ -9,17 +9,17 @@
               - @slide.pages.each do |page|
                 %tr
                   %td
-                    - image = @slide.path && page.filename ? "/" + @slide.path + "/" + page.filename : "Desert.jpg"
+                    - image = @slide.path && page.filename ? "/" + @slide.path + "/" + page.thm_filename : "Desert.jpg"
                     = image_tag image
         #canvas-menu
           %p Color
           %div
-            #blackButton.btn.changeColor 　
-            #whiteButton.btn.changeColor 　
-            #blueButton.btn.changeColor 　
-            #redButton.btn.changeColor 　
-            #orangeButton.btn.changeColor 　
-            #greenButton.btn.changeColor 　
+            #blackButton.btn.changeColor
+            #whiteButton.btn.changeColor
+            #blueButton.btn.changeColor
+            #redButton.btn.changeColor
+            #orangeButton.btn.changeColor
+            #greenButton.btn.changeColor
           %br
           %br
           %p Line width
@@ -41,6 +41,15 @@
             %i.icon-chevron-right
           #screen-button.btn.btn-large
             %i.icon-fullscreen
+#for_js{:own => "#{@slide.user.id}", :current => "#{current_user.id}"}
+:javascript
+  $(document).ready(function() {
+    if (document.URL.indexOf("presenter") != -1) {
+      if ($("#for_js").attr("own") != $("#for_js").attr("current")) {
+        location.href = "/";
+      }
+    }
+  })
 
 = javascript_include_tag "/js/socket.io.js"
 = javascript_include_tag "/js/socketManager.js"
