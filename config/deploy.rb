@@ -23,6 +23,9 @@ set :branch, "master"
 set :bundle_cmd, "/home/u/bin/bundle"
 set :bundle_without, [:development, :test]
 
+# Resque
+set :workers, { "converter" => 2 }
+
 # Deploy 
 set :deploy_via, :copy
 after :deploy, "deploy:cleanup"
@@ -31,6 +34,7 @@ after "deploy:setup" do
     mkdir -p "#{shared_path}/run"
   CMD
 end
+after "deploy:restart", "resque:restart"
 
 namespace :deploy do
   task :start, :roles => :app, :except => { :no_release => true } do
