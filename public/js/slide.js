@@ -158,6 +158,12 @@
 		draw.clear();
 	} );
 
+	$("#screen-button").toggle(function(){
+		slide.enterFullscreen('slideMain');
+	},function() {
+		slide.exitFullscreen();
+	});
+
 	$("#blackButton").click(function(){ draw.changeColor("black")});
 	$("#whiteButton").click(function(){ draw.changeColor("white")});
 	$("#redButton").click(function(){ draw.changeColor("red")});
@@ -183,7 +189,7 @@
 		jQuery( '#slide-list' ).height( jQuery('#slideMain').height() - 2 );
 	} );
 
-	jQuery( window ).keyup( function( event ) { 
+	jQuery( window ).keyup( function( event ) {
 
 		var code = event.keyCode;
 
