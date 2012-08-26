@@ -2,9 +2,7 @@
 $(document).unbind();
 <% end %>
 
-<% @slides.each do |slide| %>
-  $(".slides_list").append("<%= j(render 'slide_in_list', :slide => slide) %>");
-<% end %>
+$(".slides_list").append("<%= j(render 'slide_in_list', :slides => @slides) %>");
 $(".slides_list img").imagesLoaded(function(){
   $(".slide_in_list").wookmark({container: $(".slides_list"), itemWidth: 105});
 });

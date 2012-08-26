@@ -22,8 +22,7 @@
               %p= slide.description
       %h2 スライド(#{@slides.count})
       %ul.slides_list
-        - @slides.each do |slide|
-          = render "slides/slide_in_list", :slide => slide
+        = render "slides/slide_in_list", :slides => @slides
 
     - else
       %h2 まだスライドはありません

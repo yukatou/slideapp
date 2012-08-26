@@ -1,5 +1,4 @@
 %h2 スライド一覧
 #endless_scroll
 %ul.slides_list
-  - @slides.each do |slide|
-    = render "slide_in_list", :slide => slide
+  = render "slide_in_list", :slides => @slides
