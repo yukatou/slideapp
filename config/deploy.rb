@@ -54,6 +54,11 @@ namespace :deploy do
     run "cd #{current_path} && /usr/bin/env bundle exec rake db:seed RAILS_ENV=#{rails_env}"
   end
   
+  desc "Start Resque Workers"
+  task :start_workers, :roles => :db do
+    run_remote_rake "resque:start_workers"
+  end
+
   desc "Restart Resque Workers"
   task :restart_workers, :roles => :db do
     run_remote_rake "resque:restart_workers"
