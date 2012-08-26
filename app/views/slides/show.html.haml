@@ -12,7 +12,18 @@
                     - image = @slide.path && page.filename ? "/" + @slide.path + "/" + page.filename : "Desert.jpg"
                     = image_tag image
         #canvas-menu
-          TODO Canvas Menu
+          %p Color
+          %div
+            #blackButton.btn.changeColor 　
+            #whiteButton.btn.changeColor 　
+            #blueButton.btn.changeColor 　
+            #redButton.btn.changeColor 　
+            #orangeButton.btn.changeColor 　
+            #greenButton.btn.changeColor 　
+          %br
+          %br
+          %p Line width
+          %input#lineWidth{:type => "range", :min => "1", :max => "8", :value => "3"}
       #slideMain.span10
         #slide
           %div

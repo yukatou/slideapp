@@ -158,14 +158,21 @@
 		draw.clear();
 	} );
 
+	$("#blackButton").click(function(){ draw.changeColor("black")});
+	$("#whiteButton").click(function(){ draw.changeColor("white")});
+	$("#redButton").click(function(){ draw.changeColor("red")});
+	$("#blueButton").click(function(){ draw.changeColor("blue")});
+	$("#orangeButton").click(function(){ draw.changeColor("orange")});
+	$("#greenButton").click(function(){ draw.changeColor("green")});
+	$("#lineWidth").change(function(){ draw.changeLineWidth($("#lineWidth").val())});
+
 
 	jQuery( window ).resize( function() {
 		jQuery( '#slide' ).width( jQuery('#slideMain').width() );
 		jQuery( '#slide' ).height( window.innerHeight - 210 );
-		jQuery( '#slide-list' ).height($( '#slideMain' ).height() );
 
 		draw.resize( jQuery( '#slide' ).width(), jQuery( '#slide' ).height() );
-		jQuery( '#slide-list' ).height( jQuery('#slideMain').height() );
+		jQuery( '#slide-list' ).height( jQuery('#slideMain').height() - 2 );
 	} );
 
 	init();
