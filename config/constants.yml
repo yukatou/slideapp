@@ -3,7 +3,7 @@ defaults: &defaults
   image:
     density: 300
     size: 720
-    thumbnail_size: 100
+    thumbnail_size: 144
 
 development:
   <<: *defaults
