@@ -27,6 +27,9 @@
 		init = function() {
 
 			draw = new Draw( '#slidePage' );
+
+
+
 			getHash();
 			socket = new SocketManager();
 
@@ -83,6 +86,24 @@
 
 				} );
 			}
+
+			draw.setTap( function( xpos, ypos, slideWidth, slideHeight ) {
+
+				var quarter = slideWidth / 4;
+
+				if ( quarter > xpos ) {
+
+					prev.click();
+					return;
+				}
+
+				if ( (quarter * 3 ) < xpos ) {
+
+					next.click();
+					return;
+				}
+
+			} );
 
 		},
 
