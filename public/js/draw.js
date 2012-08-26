@@ -153,15 +153,10 @@
 			this.canvas_x = this.canvas.offset().left;
 		},
 
-		refresh: function(width, height, canvasMigFlag) {
-
+		refresh: function() {
 			this.context.clearRect( 0, 0, this.width, this.height );
-
 			this.drawImage(1);
-
-            if (canvasMigFlag === true) {
-                this.context.stroke();
-            }
+            // this.context.stroke();
 		},
 
         clear: function() {
