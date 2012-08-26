@@ -9,7 +9,7 @@
               - @slide.pages.each do |page|
                 %tr
                   %td
-                    - image slide.path & page.filename ? "/" + slide.path + page.filename : "Desert.jpg"
+                    - image @slide.path & page.filename ? "/" + @slide.path + page.filename : "Desert.jpg"
                     logger.debug image
                     = image_tag image
         #canvas-menu
