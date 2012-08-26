@@ -2,10 +2,15 @@ defaults: &defaults
 
 development:
   <<: *defaults
+  java: /usr/java/latest/bin/java
+  convert: /usr/bin/convert
+  jodconverter: /home/yukatou/src/jodconverter-core-3.0-beta-4/lib/jodconverter-core-3.0-beta-4.jar 
 
 test:
   <<: *defaults
 
 production:
   <<: *defaults
-
+  java: /usr/bin/java
+  convert: /usr/bin/convert
+  jodconverter: /opt/jodconverter-core-3.0-beta-4/lib/jodconverter-core-3.0-beta-4.jar
