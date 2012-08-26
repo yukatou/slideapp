@@ -3,5 +3,4 @@
     %li.slide_in_list
       - image = File.exist?("public/"+slide.path+"/000.jpg") ? "/"+slide.path+"/000.jpg": "converting.png"
       = image_tag image
-      %h4= slide.title
-      %p= slide.description
+      %h4= truncate_lines(slide.title, 24)

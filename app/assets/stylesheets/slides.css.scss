@@ -10,6 +10,12 @@
     width: 93px;
     border: solid 1px #ccc;
   }
+  h4 {
+    height: 38px;
+    word-wrap: break-word;
+    overflow: hidden;
+    // text-overflow: ellipsis;
+  }
 }
 .slide_in_list {
   width: 95px;
