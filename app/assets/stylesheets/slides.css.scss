@@ -35,3 +35,9 @@
 .error_slide {
   background: #fcc;
 }
+
+@media (max-width: 767px) {
+  #sidebar.span2 {
+    display: none;
+  }
+}
