@@ -37,6 +37,6 @@ production:
   reconnect: false
   database: slideapp_production
   pool: 5
-  username: root
-  password:
+  username: u3u 
+  password: kitaki
   host: localhost
