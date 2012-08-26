@@ -17,21 +17,18 @@
         #slide
           %div
             %canvas#slidePage{:height => "550px"}
-        %div
-          %span#showCanvas.btn
+        #buttons
+          #showCanvas.btn.btn-large
             %i.icon-pencil
-            書く
-          %span#clCanvas.btn
+          #clCanvas.btn.btn-large
             %i.icon-remove
-            canvas削除
-          %span.btn{:onclick => "slide.showSlide()"}
+          .btn.btn-large{:onclick => "slide.showSlide()"}
             %i.icon-play
-            スライドショー
-          %span#prev.btn{:onclick => "slide.prevSlide()"}
+          #prev.btn.btn-large{:onclick => "slide.prevSlide()"}
             %i.icon-chevron-left
-          %span#next.btn{:onclick => "slide.nextSlide()"}
+          #next.btn.btn-large{:onclick => "slide.nextSlide()"}
             %i.icon-chevron-right
-          %span#screen-button.btn{:onclick => "slide.enterFullscreen('wrapper')"}
+          #screen-button.btn.btn-large{:onclick => "slide.enterFullscreen('wrapper')"}
             %i.icon-fullscreen
 
 = javascript_include_tag "/js/socket.io.js"
