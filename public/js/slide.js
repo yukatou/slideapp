@@ -168,8 +168,7 @@
 
 
 	jQuery( window ).resize( function() {
-		jQuery( '#slide' ).width( jQuery('#slideMain').width() );
-		jQuery( '#slide' ).height( window.innerHeight - 210 );
+		jQuery('#slideMain').height( window.innerHeight - 185 );
 
 		draw.resize( jQuery( '#slide' ).width(), jQuery( '#slide' ).height() );
 		jQuery( '#slide-list' ).height( jQuery('#slideMain').height() - 2 );
