@@ -119,10 +119,9 @@
   width: 100% !important;
   height: 100% !important;
   background: #000000;
-}
-
-#slideMain:-webkit-full-screen {
-	border: none;
+  #slideMain {
+	  border: solid 1px black;
+  }
 }
 
 :-webkit-full-screen #buttons {
