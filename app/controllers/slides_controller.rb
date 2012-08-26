@@ -52,6 +52,16 @@ class SlidesController < ApplicationController
     end
   end
 
+  def edit
+    @slide = Slide.find(params[:id])
+  end
+
+  def update
+    @slide = Slide.find(params[:id])
+    @slide.update_attributes(params[:slide])
+    redirect_to  user_path(current_user), notice: '編集しました'
+  end
+
   def destroy
     @slide = Slide.find(params[:id])
     @slide.destroy
@@ -71,8 +81,8 @@ class SlidesController < ApplicationController
     hash = {"slide_id"=> slide.id, "user_id"=> slide.user.id, "data" => {}}
     Page.where(:slide_id => params[:id]).each do |page|
       hash["data"][page.order] = {
-        "url"=> root_url + slide.path + page.filename,
-        "url_thm"=> root_url + slide.path + page.thm_filename
+        "url"=> root_url + slide.path + "/" + page.filename,
+        "url_thm"=> root_url + slide.path + "/" + page.thm_filename
       }
     end
     render json: hash
