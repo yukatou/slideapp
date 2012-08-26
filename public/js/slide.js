@@ -166,9 +166,18 @@
 	$("#greenButton").click(function(){ draw.changeColor("green")});
 	$("#lineWidth").change(function(){ draw.changeLineWidth($("#lineWidth").val())});
 
+	jQuery( '#wrapper' ).bind( 'webkitfullscreenchange', function() {
+
+		jQuery( window ).resize();
+	} );
 
 	jQuery( window ).resize( function() {
-		jQuery('#slideMain').height( window.innerHeight - 185 );
+		var isFullScreen = document.mozFullScreen || document.webkitIsFullScreen;
+		if ( isFullScreen ) {
+			jQuery( '#slideMain' ).height( window.innerHeight - 10 );
+		} else {
+			jQuery( '#slideMain' ).height( window.innerHeight - 180 );
+		}
 
 		draw.resize( jQuery( '#slide' ).width(), jQuery( '#slide' ).height() );
 		jQuery( '#slide-list' ).height( jQuery('#slideMain').height() - 2 );

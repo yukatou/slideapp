@@ -1,6 +1,8 @@
 (function(window, document) {
 
 	var Slide = function() {
+
+		this.isFullscreen = false;
 		
 		return this;
 	};
