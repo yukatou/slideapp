@@ -8,6 +8,7 @@ ENVIROMENT=$2
 
 SCRIPT_DIR=`dirname $0`
 ROOT_DIR=$(cd "${SCRIPT_DIR}/../../"; pwd)
+PORT=3000
 
 PID="${ROOT_DIR}/tmp/pids/unicorn.pid"
 CONF="${ROOT_DIR}/config/unicorn/release.rb"
@@ -20,7 +21,7 @@ start()
         exit 1;
     fi
     echo "start $NAME";
-    bundle exec unicorn_rails -c ${CONF} -E ${ENVIROMENT} -D
+    bundle exec unicorn_rails -c ${CONF} -E ${ENVIROMENT} -p ${PORT} -D
 }
 
 stop()
