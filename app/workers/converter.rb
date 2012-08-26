@@ -43,8 +43,8 @@ class Converter
 
       max = Dir::glob(glob_file).count
       for order in (1 .. max) do
-        filename = order.to_s + '.jpg'
-        thm_filename = order.to_s + '_thm.jpg'
+        filename = '%03d.jpg' % [order - 1]
+        thm_filename = '%03d_thm.jpg' % [order - 1]
 
         Page.create!(
           :filename => filename,
