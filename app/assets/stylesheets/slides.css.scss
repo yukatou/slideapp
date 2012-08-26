@@ -48,11 +48,21 @@
 }
 #sidebar {
   background: #444;
+  overflow-y: scroll;
 }
 #slide-list {
-  overflow-y: scroll;
-  .table td:first-of-type {
-    border-top: 0;
+  .table {
+    margin-bottom: 0;
+    td {
+      padding: 10%;
+      border-top: solid 1px #999;
+    }
+    tr:first-of-type td{
+      border-top: 0;
+    }
+  }
+  img {
+    width: 100%;
   }
 }
 #canvas-menu{
