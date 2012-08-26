@@ -1,9 +1,9 @@
 defaults: &defaults
   upload_max_size: 20
   image:
-    density: 300
+    density: 144 
     size: 720
-    thumbnail_size: 144
+    thumbnail_size: 300 
 
 development:
   <<: *defaults
