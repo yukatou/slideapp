@@ -29,10 +29,10 @@ class SlidesController < ApplicationController
 
     begin
       file = params[:file]
-      ext = File.extname(file.original_filename)
       @slide.save!
 
-      path = 'tmp/slides/' + @slide.id.to_s
+      ext = File.extname(file.original_filename)
+      path = 'public/data/' + @slide.id.to_s
       filename =  @slide.id.to_s + ext
       save_filename = path + '/' + filename
 
