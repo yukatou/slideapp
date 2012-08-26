@@ -109,11 +109,20 @@
   width: 85%;
 }
 
+#sidebar td {
+	text-align: center !important;
+}
+
 /* -webkit- */
 :-webkit-full-screen {
   margin: 0 !important;
   width: 100% !important;
   height: 100% !important;
+  background: #000000;
+}
+
+#slideMain:-webkit-full-screen {
+	border: none;
 }
 
 :-webkit-full-screen #buttons {
