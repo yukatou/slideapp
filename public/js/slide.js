@@ -183,6 +183,17 @@
 		jQuery( '#slide-list' ).height( jQuery('#slideMain').height() - 2 );
 	} );
 
+	jQuery( window ).keyup( function( event ) { 
+
+		var code = event.keyCode;
+
+		if ( code === 37 ) {
+			drawImage( socket.prev() );
+		} else if ( code === 39 ) {
+			drawImage( socket.next() );
+		}
+	} );
+
 	init();
 
 	jQuery( window ).resize();
