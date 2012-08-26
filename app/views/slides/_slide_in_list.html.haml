@@ -1,5 +1,6 @@
 %a{:href => slide_path(slide)}
   %li.slide_in_list
-    = image_tag "converting.png", :width => "95"
+    - image = File.exist?("/"+slide.path+"/001.jpg") ? "/"+slide.path+"/001.jpg": "converting.png"
+    = image_tag image, :width => "95"
     %h4= slide.title
     %p= slide.description
