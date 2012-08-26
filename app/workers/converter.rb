@@ -22,7 +22,7 @@ class Converter
       origin = '%s/public/%s/%s' % [Rails.root, slide.path, slide.origin]
       plog "#{slide.id}  #{origin}" 
 
-      raise unless File.exists?(origin)
+      raise 'file not exist' unless File.exists?(origin)
 
       convert_file = '%s/public/%s/%d.pdf' % [Rails.root, slide.path, slide.id]
       image_files = '%s/public/%s/%s' % [Rails.root, slide.path, '%03d.jpg']

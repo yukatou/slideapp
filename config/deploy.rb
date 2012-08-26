@@ -67,7 +67,7 @@ end
 
 
 
-after "deploy:create_symlink", "deploy:restart_workers"
+#after "deploy:create_symlink", "deploy:restart_workers"
 
 ##
 # Rake helper task.
