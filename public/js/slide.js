@@ -3,6 +3,7 @@
 		// 0: viewer
 		// 1: presenter
 	var slideTypeId = 0,
+		slideType,
 
 		slideTypeList = {
 			viewer: 0,
@@ -26,6 +27,9 @@
 		init = function() {
 
 			draw = new Draw( '#slidePage' );
+
+
+
 			getHash();
 			socket = new SocketManager();
 
@@ -45,7 +49,12 @@
 							pageId = 1;
 						}
 
-						drawImage( socket.getSlideUrl( pageId ) );
+						var slideUrl = socket.getSlideUrl( pageId );
+
+						if ( slideUrl !== null ) {
+							socket.setPageId( pageId );
+							drawImage( slideUrl );
+						}
 
 					} else {
 						drawImage( socket.current() );
@@ -60,8 +69,12 @@
 
 				receivePageId: function( data ) {
 
-					drawImage( socket.getSlideUrl( data.pageId ) );
+					var slideUrl = socket.getSlideUrl( data.pageId );
 
+					if ( slideUrl !== null ) {
+						socket.setPageId( data.pageId );
+						drawImage( slideUrl );
+					}
 				}
 			});
 
@@ -74,6 +87,28 @@
 				} );
 			}
 
+			draw.setTap( function( xpos, ypos, slideWidth, slideHeight ) {
+
+				var quarter = slideWidth / 4;
+
+				if ( quarter > xpos ) {
+
+					prev.click();
+					return;
+				}
+
+				if ( (quarter * 3 ) < xpos ) {
+
+					next.click();
+					return;
+				}
+
+			} );
+
+		},
+
+		setHash = function () {
+			location.hash = '!/' + slideType + '/' + socket.getPageId();
 		},
 
 		drawImage = function( imageUrl ) {
@@ -82,6 +117,8 @@
 
 				return;
 			}
+
+			setHash();
 
 			draw.setImage( imageUrl );
 		},
@@ -103,6 +140,8 @@
 			}
 
 			if ( slideTypeList[hashList[0]] !== undefined ) {
+
+				slideType = hashList[0];
 
 				slideTypeId = slideTypeList[hashList[0]];
 
@@ -159,18 +198,19 @@
 	} );
 
 	$("#screen-button").toggle(function(){
-		slide.enterFullscreen('slideMain');
+		slide.enterFullscreen('wrapper');
 	},function() {
 		slide.exitFullscreen();
 	});
 
-	$("#blackButton").click(function(){ draw.changeColor("black")});
-	$("#whiteButton").click(function(){ draw.changeColor("white")});
-	$("#redButton").click(function(){ draw.changeColor("red")});
-	$("#blueButton").click(function(){ draw.changeColor("blue")});
-	$("#orangeButton").click(function(){ draw.changeColor("orange")});
-	$("#greenButton").click(function(){ draw.changeColor("green")});
-	$("#lineWidth").change(function(){ draw.changeLineWidth($("#lineWidth").val())});
+	$(".changeColor").click(function(){
+		$(".changeColor").removeClass("selectedColor");
+		$(this).addClass("selectedColor");
+		draw.changeColor($(this).attr("color"));
+	});
+	$("#lineWidth").change(function(){
+		draw.changeLineWidth($("#lineWidth").val())
+	});
 
 	jQuery( '#wrapper' ).bind( 'webkitfullscreenchange', function() {
 
@@ -180,13 +220,13 @@
 	jQuery( window ).resize( function() {
 		var isFullScreen = document.mozFullScreen || document.webkitIsFullScreen;
 		if ( isFullScreen ) {
-			jQuery( '#slideMain' ).height( window.innerHeight - 10 );
+			jQuery( '#slideMain' ).height( window.innerHeight);
 		} else {
 			jQuery( '#slideMain' ).height( window.innerHeight - 180 );
 		}
 
 		draw.resize( jQuery( '#slide' ).width(), jQuery( '#slide' ).height() );
-		jQuery( '#slide-list' ).height( jQuery('#slideMain').height() - 2 );
+		jQuery( '#sidebar' ).height( jQuery('#slideMain').height()+2);
 	} );
 
 	jQuery( window ).keyup( function( event ) {
@@ -198,6 +238,25 @@
 		} else if ( code === 39 ) {
 			drawImage( socket.next() );
 		}
+	} );
+
+	var index = 1;
+	jQuery( '#sidebar tr' ).each( function() {
+
+		var pageId = jQuery( this ).data( 'index', index++ );
+	});
+
+	jQuery( '#sidebar tr' ).click( function () {
+
+		var pageId = jQuery( this ).data( 'index' );
+
+		var slideUrl = socket.getSlideUrl( pageId );
+
+		if ( slideUrl !== null ) {
+			socket.setPageId( pageId );
+			drawImage( slideUrl );
+		}
+
 	} );
 
 	init();

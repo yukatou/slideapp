@@ -14,6 +14,7 @@
 		this.slideLeft   = 0;
 		this.slideWidth  = 0;
 		this.slideHeight = 0;
+		this.tap = function( xpos, ypos, slideWidth, slideHeight ) {};
 
         // canvas用データ
         this.canvas_y = this.canvas.offset().top;
@@ -62,6 +63,12 @@
     	jQuery( idName ).bind("touchend", function() {
             self.touchEnd();
         });
+
+		jQuery( idName ).bind("click", function( event ) {
+			event.preventDefault();
+			self.click( event );
+			return false;
+		} );
 
         return this;
     };
@@ -373,6 +380,29 @@
             }
         },
 
+		click: function( event ) {
+
+			if ( this.canvas_event ) {
+
+				return;
+			}
+
+			var xpos = event.pageX - this.canvas.offset().left - this.slideLeft;
+			var ypos = event.pageY - this.canvas.offset().top - this.slideTop;
+
+			if ( xpos < 0 || xpos > this.slideWidth ) {
+
+				return;
+			}
+
+			if ( ypos < 0 || ypos > this.slideHeight ) {
+
+				return;
+			}
+
+			this.tap( xpos, ypos, this.slideWidth, this.slideHeight );
+		}, 
+
 		setSendCanvas: function( callback ) {
 
 			this.sendCanvas = callback;
@@ -424,7 +454,12 @@
         changeLineWidth: function (value) {
             this.context.beginPath();
             this.context.lineWidth = Number(value);
-        }
+        }, 
+
+		setTap: function( callback ) {
+
+			this.tap = callback;
+		}
     }
 
 	window.Draw = Draw;
