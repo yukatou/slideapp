@@ -163,7 +163,13 @@
 		setPageId: function ( pageId ) {
 
 			this.pageId = pageId;
+
+			if ( this.slideTypeId === 1 ) {
+				this.socket.emit( 'currentView', { slideId: this.slideId, 
+												   pageId:  this.pageId } );
+			}
 		}, 
+
 
 		getPageId: function () {
 
