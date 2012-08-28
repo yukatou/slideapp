@@ -2,7 +2,7 @@
   %li.slide_in_list
     %a{:href => current_user == slide.user ? slide_presenter_path(slide) : slide_path(slide)}
       - image = File.exist?("public/"+slide.path+"/000_thm.jpg") ? "/"+slide.path+"/000_thm.jpg": "converting.png"
-      = image_tag image
+      = image_tag image, :size => '100x75'
       %h4= truncate_lines(slide.title, 24)
     - if current_user == slide.user && params[:controller] == "users"
       =link_to "edit", edit_slide_path(slide)
